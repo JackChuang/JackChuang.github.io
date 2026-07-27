@@ -1,0 +1,55 @@
+---
+layout: default
+title: Publications
+permalink: /publications/
+description: Peer-reviewed papers by Ho-Ren (Jack) Chuang on operating systems, virtualization, and distributed systems.
+---
+
+<div class="pagehead">
+  <h1>Publications</h1>
+  {%- comment -%}
+    Indexed profiles. dblp is the one kept authoritative — _data/publications.yml
+    is generated from https://dblp.org/pid/{{ site.dblp_pid }}.xml
+  {%- endcomment -%}
+  {%- comment -%}
+    target="_blank" so the reader keeps this page, same as the CV item in the
+    nav. rel="noopener" is not optional with it: without that, the page being
+    opened gets a handle on this one through window.opener and can redirect it.
+  {%- endcomment -%}
+  <div class="links">
+    <a href="https://scholar.google.com/citations?user={{ site.scholar_id }}" target="_blank" rel="noopener">Google Scholar</a>
+    <a href="https://dblp.org/pid/{{ site.dblp_pid }}.html" target="_blank" rel="noopener">dblp</a>
+    <a href="https://orcid.org/{{ site.orcid }}" target="_blank" rel="noopener">ORCID</a>
+  </div>
+</div>
+
+{% if site.data.publications and site.data.publications.size > 0 %}
+
+  {%- comment -%}
+    No sort here on purpose. The file's order IS the display order, same as
+    projects.yml — that is what its header documents, and it is the only way to
+    control ordering within a single year (three of these are 2017). Re-adding
+    `sort: "year" | reverse` would silently reverse same-year entries.
+  {%- endcomment -%}
+  {% for pub in site.data.publications %}
+  <div class="row">
+    <div class="row__rail">
+      <span class="year">{{ pub.year }}</span>
+      {% if pub.kind %}<span class="meta">{{ pub.kind }}</span>{% endif %}
+    </div>
+    <div class="row__body">
+      <h2>{{ pub.title }}</h2>
+      <span class="cite">
+        {{ pub.authors | markdownify | remove: '<p>' | remove: '</p>' | strip }}<br>
+        <em>{{ pub.venue }}</em>
+      </span>
+      {% if pub.links %}
+      <div class="links">
+        {% for link in pub.links %}<a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+{% endif %}

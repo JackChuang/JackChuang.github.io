@@ -1,0 +1,38 @@
+---
+layout: default
+title: Research Projects
+permalink: /projects/
+description: Systems research projects by Ho-Ren (Jack) Chuang — operating systems, virtualization, distributed systems, and LLM inference.
+---
+
+<div class="pagehead">
+  <h1>Research Projects</h1>
+  <p>WIP&hellip;</p>
+</div>
+
+{% if site.data.projects and site.data.projects.size > 0 %}
+
+  {% for proj in site.data.projects %}
+  <div class="row">
+    <div class="row__rail">
+      <span class="year">{{ proj.period }}</span>
+      {% if proj.role %}<span class="meta">{{ proj.role }}</span>{% endif %}
+    </div>
+    <div class="row__body">
+      <h2>{{ proj.name }}</h2>
+      {{ proj.summary | markdownify }}
+      {% if proj.stack %}
+      <div class="domains">
+        {% for tech in proj.stack %}<span>{{ tech }}</span>{% endfor %}
+      </div>
+      {% endif %}
+      {% if proj.links %}
+      <div class="links">
+        {% for link in proj.links %}<a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+{% endif %}

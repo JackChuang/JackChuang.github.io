@@ -1,0 +1,156 @@
+---
+layout: default
+title: About
+description: >-
+  Ho-Ren (Jack) Chuang — Ph.D. in Computer Engineering from Virginia Tech.
+  Working on AI infrastructure, operating systems, virtualization,
+  distributed systems, and embedded systems.
+---
+
+<section class="hero">
+  <div class="hero__intro">
+    {%- comment -%}
+      Hidden visually, not removed: the page needs one h1 for the document
+      outline and for search engines, but the nav already names this page.
+    {%- endcomment -%}
+    <h1 class="visually-hidden">Ho-Ren (Jack) Chuang</h1>
+    <p>
+      My name is Ho-Ren (Jack) Chuang.
+      I received my Ph.D. in <a href="https://ece.vt.edu/">Computer Engineering</a> from
+      <a href="https://vt.edu/">Virginia Tech</a> in 2022, working with
+      <a href="https://ece.vt.edu/people/profile/ravindran">Binoy Ravindran</a> in the
+      <a href="https://www.ssrg.ece.vt.edu/index.php">Systems Software Research Group (SSRG)</a>.
+    </p>
+    <p>
+      More detail on the individual systems I have built is on the
+      <a href="{{ '/projects/' | relative_url }}">Research Projects</a> page, and the
+      resulting papers are listed under <a href="{{ '/publications/' | relative_url }}">Publications</a>.
+    </p>
+  </div>
+
+  <figure class="portrait">
+    <img src="{{ '/assets/img/jack.jpg' | relative_url }}"
+         srcset="{{ '/assets/img/jack.jpg' | relative_url }} 900w, {{ '/assets/img/jack@2x.jpg' | relative_url }} 1400w"
+         sizes="(max-width: 880px) 220px, 200px"
+         width="900" height="1125"
+         alt="Portrait of Ho-Ren (Jack) Chuang">
+  </figure>
+</section>
+
+<div class="row">
+  <div class="row__rail"><span class="label">Status</span></div>
+  <div class="row__body">
+    <p class="status">Open to full-time roles in AI infrastructure, US-based.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row__rail"><span class="label">Focus</span></div>
+  <div class="row__body">
+    <dl class="focus">
+      <dt>Now</dt>
+      <dd>
+        <div class="domains domains--now"><span>AI infrastructure</span></div>
+        <ul class="detail">
+          <li>
+            Large language model (LLM) inference frameworks &mdash; vLLM, SGLang, CUDA, Triton, etc.
+            <ul>
+              <li>Transformer (attention, MoE), quantization, KV cache, fused kernels, speculative decoding, etc.</li>
+            </ul>
+          </li>
+        </ul>
+      </dd>
+      <dt>Previously</dt>
+      <dd>
+        <div class="domains">
+          <span>Operating Systems</span>
+          <span>Virtualization</span>
+          <span>Distributed Systems</span>
+          <span>Embedded Systems</span>
+        </div>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row__rail"><span class="label">Contact</span></div>
+  <div class="row__body">
+    <span class="cite">
+      <a href="https://www.linkedin.com/in/{{ site.linkedin_user }}/">LinkedIn</a> &middot;
+      <a href="https://github.com/{{ site.github_user }}">GitHub</a> &middot;
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </span>
+  </div>
+</div>
+
+{%- comment -%}
+  One row per entry, year in the rail — the same structure publications.html
+  uses, so the left edge reads as one index across the whole site.
+{%- endcomment -%}
+
+<h2 class="section">Education</h2>
+
+<div class="row">
+  <div class="row__rail">
+    <span class="year">2022</span>
+    <span class="meta">Doctorate</span>
+  </div>
+  <div class="row__body">
+    <h3>Ph.D. Computer Engineering</h3>
+    <span class="cite"><a href="https://vt.edu/">Virginia Tech</a></span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row__rail">
+    <span class="year">2014</span>
+    <span class="meta">Master&rsquo;s</span>
+  </div>
+  <div class="row__body">
+    <h3>M.S. Computer Engineering</h3>
+    <span class="cite"><a href="https://www.ntust.edu.tw/">National Taiwan University of Science and Technology</a></span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row__rail">
+    <span class="year">2012</span>
+    <span class="meta">Bachelor&rsquo;s</span>
+  </div>
+  <div class="row__body">
+    <h3>B.S. Computer Engineering</h3>
+    <span class="cite"><a href="https://www.ntust.edu.tw/">National Taiwan University of Science and Technology</a></span>
+  </div>
+</div>
+
+<h2 class="section">Beyond work</h2>
+
+<div class="row">
+  <div class="row__rail">
+    <span class="year">2016&ndash;17</span>
+    <span class="meta">Leadership</span>
+  </div>
+  <div class="row__body">
+    <h3>President</h3>
+    <span class="cite">Taiwanese Student Association at Virginia Tech</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row__rail">
+    <span class="year">2009&ndash;14</span>
+    <span class="meta">Leadership</span>
+  </div>
+  <div class="row__body">
+    <h3>Founder, President, and later Consultant</h3>
+    <span class="cite">Billiard Club at NTUST</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row__rail"><span class="label">Languages</span></div>
+  <div class="row__body">
+    <span class="cite">English &middot; Mandarin &middot; Taiwanese</span>
+  </div>
+</div>

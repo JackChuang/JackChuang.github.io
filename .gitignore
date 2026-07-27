@@ -1,0 +1,24 @@
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+Gemfile.lock
+.DS_Store
+
+# Gems installed locally for `bundle exec jekyll serve` (bundle path is set to
+# vendor/bundle so nothing is installed system-wide).
+vendor/
+.bundle/
+
+# Local preview helper. Hard-codes this Mac's Homebrew Ruby path and a Rosetta
+# arch workaround, so it is machine-specific and stays out of the public repo.
+serve.sh
+
+# Working notes for Claude Code. Stays local — the repo is public and this
+# file carries private context (job-search status, open questions).
+CLAUDE.md
+
+# Maintainer notes: deploy steps, which-file-does-what, counter rules. All of
+# it is for whoever edits this site, not for whoever reads it. Folded into
+# CLAUDE.md; kept here so the file survives locally.
+README.md

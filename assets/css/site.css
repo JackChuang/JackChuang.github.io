@@ -1,0 +1,528 @@
+/* =========================================================================
+   Ho-Ren (Jack) Chuang — personal site
+   Design: technical spec-sheet. Sans display / serif body / mono marginalia.
+   ========================================================================= */
+
+:root {
+  --paper:        #f4f5f3;
+  --paper-raised: #ffffff;
+  --ink:          #14161a;
+  --ink-mid:      #5a6068;
+  --ink-soft:     #8a9098;
+  --rule:         #dbddd8;
+  --rule-strong:  #c3c6bf;
+  --accent:       #6e1b2e;
+  --accent-tint:  #f0e8ea;
+
+  --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --rail: 148px;
+  --gap: 2.75rem;
+  --measure: 68ch;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- shared primitives ------------------------------------------ */
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.75rem;
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-tint);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+a:hover { border-bottom-color: var(--accent); }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+hr.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Present to assistive tech and to search engines, absent from the page.
+   Used for the h1 on the home page, where the heading would only repeat the
+   nav tab above it. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 99;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.6rem 1rem;
+  border: 0;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+/* ---------- masthead ---------------------------------------------------- */
+
+.masthead {
+  padding-top: 2.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.masthead__name {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.012em;
+  margin: 0 0 1.4rem;
+}
+.masthead__name a {
+  color: var(--ink);
+  border-bottom: 0;
+}
+.masthead__name a:hover { color: var(--accent); }
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  padding: 0;
+  margin: 0 0 -1px;
+  list-style: none;
+}
+
+.nav a {
+  display: inline-block;
+  padding-bottom: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover { color: var(--ink); }
+.nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+.nav a .ext {
+  font-size: 0.85em;
+  color: var(--ink-soft);
+  margin-left: 0.25em;
+}
+
+/* ---------- hero (about page only) -------------------------------------- */
+
+.hero {
+  display: grid;
+  /* 200px, not 268. The heading above this text was removed, which took ~60px
+     off the left column; a portrait any wider than this ends up hanging below
+     the last line of the intro with nothing beside it. */
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 3.5rem;
+  align-items: start;
+  padding: 3.25rem 0 2.25rem;
+}
+
+.hero__intro p {
+  max-width: var(--measure);
+  margin: 0 0 0.9rem;
+  /* full ink, not --ink-mid. This is the only prose on the page; setting it
+     grey made it read as a caption for the photograph next to it. */
+  color: var(--ink);
+}
+.hero__intro p:last-child { margin-bottom: 0; }
+
+/* The availability line. The site's own oxblood rather than a raw red, so it
+   reads as emphasis inside the palette instead of an alert pasted on top of
+   it, and mono because on this page that is the voice used for facts. */
+.status {
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+  color: var(--accent);
+  margin: 0;
+}
+
+.domains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+}
+.domains span {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: var(--accent-tint);
+  color: var(--accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+/* What he does now: filled instead of tinted, so present-vs-past registers as
+   weight before the labels are read at all. */
+.domains--now span {
+  background: var(--accent);
+  color: var(--paper-raised);
+}
+
+/* Now / Previously. A key column narrow enough that the tags start close to the
+   rail, so the row still reads left-to-right in one move. */
+.focus {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 0.8rem 1.25rem;
+  align-items: start;
+  margin: 0;
+}
+.focus dt {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-top: 0.28em;
+}
+.focus dd { margin: 0; }
+
+/* What sits under a Focus tag. Mono, because on this page that is the voice
+   for anything that is data rather than sentence; markers drawn with ::before
+   so the two levels stay aligned to the tag above instead of to a browser's
+   default list indent. */
+.detail {
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 0.78125rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.detail li {
+  position: relative;
+  padding-left: 1.05rem;
+  margin: 0;
+}
+.detail > li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: var(--ink-soft);
+}
+.detail ul {
+  margin: 0.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.detail ul li {
+  color: var(--ink-mid);
+}
+.detail ul li::before {
+  content: "\2013";
+  position: absolute;
+  left: 0;
+  color: var(--ink-soft);
+}
+
+.portrait { margin: 0; }
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Square, cropped from the source 4:5.
+     At the 268px column that is 268px tall, against roughly 250px of name +
+     spec block beside it — so the two columns end within ~20px of each other
+     instead of the photo hanging 85px below Contact.
+     Do not try to do this by stretching the grid row instead: the row's height
+     is set BY the portrait, so stretching it can never make the portrait
+     shorter. That is circular, and it is what broke this once already.
+     25% crops off the shirt and keeps the head clear of the top edge. */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+/* ---------- page head (inner pages) ------------------------------------- */
+
+.pagehead { padding: 3.25rem 0 2.25rem; }
+.pagehead h1 {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  letter-spacing: -0.028em;
+  line-height: 1.06;
+  margin: 0.5rem 0 0;
+}
+.pagehead p {
+  max-width: var(--measure);
+  margin: 1rem 0 0;
+  color: var(--ink-mid);
+}
+
+/* ---------- section rule ------------------------------------------------- */
+
+/* Opens a group of rows. The rail carries the per-entry index (year + kind),
+   so the group name needs its own slot rather than competing for that one.
+   Set in mono at label size: it should register as apparatus, not as a title. */
+.section {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 3.25rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ink);
+}
+/* the label already draws the rule, so the row under it must not draw another */
+.section + .row {
+  border-top: 0;
+  padding-top: 1.25rem;
+}
+
+/* ---------- marginalia rows --------------------------------------------- */
+
+.row {
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: var(--gap);
+  padding: 2rem 0;
+  border-top: 1px solid var(--rule);
+}
+.row:first-of-type { border-top: 1px solid var(--ink); }
+
+.row__rail { padding-top: 0.3rem; }
+.row__rail .label { display: block; }
+.row__rail .year {
+  display: block;
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.row__rail .meta {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.row__body { max-width: var(--measure); }
+.row__body > *:first-child { margin-top: 0; }
+.row__body > *:last-child { margin-bottom: 0; }
+
+.row__body h2, .row__body h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  letter-spacing: -0.016em;
+  line-height: 1.24;
+  margin: 0 0 0.6rem;
+}
+.row__body h2 { font-size: 1.3125rem; }
+.row__body h3 { font-size: 1.0625rem; }
+
+.row__body p { margin: 0 0 0.9rem; }
+.row__body ul { margin: 0 0 0.9rem; padding-left: 1.15rem; }
+.row__body li { margin-bottom: 0.3rem; }
+
+/* citation line for publications */
+.cite {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.78125rem;
+  line-height: 1.55;
+  color: var(--ink-mid);
+  margin-top: 0.5rem;
+}
+.cite em { font-style: normal; color: var(--ink); }
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.85rem;
+}
+.links a {
+  font-family: var(--mono);
+  font-size: 0.71875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+/* ---------- footer / visitor counters ----------------------------------- */
+
+.footer {
+  margin-top: 4.5rem;
+  border-top: 1px solid var(--ink);
+  padding: 2.5rem 0 3.5rem;
+}
+
+.counters {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+}
+.counters__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.counters__total {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.counters__total a { border-bottom: 0; display: block; }
+.counters__total img { display: block; max-width: 100%; height: auto; }
+/* Three widgets sized in proportion to each other, and still fluid.
+   flex-basis:0 means each one's width comes purely from its flex-grow, so the
+   grow numbers below ARE the width ratio. flex-wrap keeps it responsive with no
+   breakpoint: three across while they fit, then two, then one. */
+.counters__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem 2rem;
+  align-items: flex-start;
+}
+.counters__grid a {
+  display: block;
+  border-bottom: 0;
+  flex: 1 1 0;
+  min-width: 210px;   /* below this they wrap rather than shrink to illegible */
+}
+
+/* The grow numbers are the widgets' real pixel widths, measured from the PNGs
+   Flag Counter actually serves (600 / 470 / 333). Sizing them in that ratio
+   makes all three render at one identical scale factor, so none is squashed
+   harder than its neighbours — which is also why the middle one comes out
+   ~1.4x the right-hand one rather than the 1.5x its 6-vs-4 columns suggest:
+   the columns are the same width, but the surrounding chrome is not.
+   max-width caps each at native size so a wide viewport never upscales and
+   blurs them. */
+.counters__grid a.counters__cell--map     { flex-grow: 600; max-width: 600px; }
+.counters__grid a.counters__cell--country { flex-grow: 470; max-width: 470px; }
+.counters__grid a.counters__cell--us      { flex-grow: 333; max-width: 333px; }
+.counters__grid img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  /* styles the alt text too, so a slow or blocked widget degrades quietly */
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  margin-top: 1.75rem;
+}
+.colophon a { border-bottom-color: var(--rule-strong); }
+
+/* ---------- responsive --------------------------------------------------- */
+
+@media (max-width: 880px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2.5rem;
+  }
+  .portrait {
+    position: static;
+    max-width: 220px;
+    order: -1;
+  }
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    padding: 1.6rem 0;
+  }
+  .row__rail {
+    padding-top: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .row__rail .meta { margin-top: 0; }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 1rem; }
+  .wrap { padding: 0 1.15rem; }
+  .nav { gap: 1.15rem; }
+  .focus { grid-template-columns: 1fr; gap: 0.3rem 0; }
+  .focus dd { margin-bottom: 0.9rem; }
+  .focus dd:last-child { margin-bottom: 0; }
+  .counters { padding: 1.15rem; }
+  .counters__grid { gap: 1.5rem; }   /* widths still proportional, see above */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .nav, .counters, .skip { display: none; }
+  body { background: #fff; font-size: 11pt; }
+}

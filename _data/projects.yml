@@ -1,0 +1,25 @@
+# =============================================================================
+#  RESEARCH PROJECTS
+#  Newest first. The page renders straight from this file.
+#
+#  Fields:
+#    name     (required)
+#    period   (required)  e.g. "2019–2022" — shown in the left rail
+#    role     (optional)  e.g. "Lead developer" — shown under the period
+#    summary  (required)  1–3 sentences. Markdown allowed.
+#    stack    (optional)  list of technologies, rendered as tags
+#    links    (optional)  list of { name, url } — Code, Paper, Site
+#
+#  Template — copy this block for each project:
+#
+#  - name: "Popcorn Linux"
+#    period: "2016–2022"
+#    role: "Lead developer"
+#    summary: >-
+#      One to three sentences on the problem, what you built, and the result.
+#      Numbers land well here — speedups, scale, lines of kernel code.
+#    stack: [Linux kernel, C, x86-64, ARM64]
+#    links:
+#      - name: Code
+#        url: https://github.com/ssrg-vt/popcorn-kernel
+# =============================================================================

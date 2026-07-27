@@ -1,0 +1,114 @@
+# =============================================================================
+#  PUBLICATIONS
+#  Newest first — this file's order IS the display order. The page renders
+#  straight from here; you never touch HTML to add a paper.
+#
+#  Fields:
+#    year     (required)  shown in the left rail
+#    title    (required)
+#    authors  (required)  use **Ho-Ren (Jack) Chuang** to bold your own name
+#    venue    (required)  conference or journal, short form
+#    kind     (optional)  Conference | Journal | Workshop | Thesis | Preprint
+#    links    (optional)  list of { name, url } — PDF, DOI, Code, Slides, Video
+#
+#  Template — copy this block for each paper:
+#
+#  - year: 2022
+#    title: "Exact title of the paper"
+#    authors: "**Ho-Ren (Jack) Chuang**, Co-Author One, Co-Author Two"
+#    venue: "USENIX ATC '22"
+#    kind: Conference
+#    links:
+#      - name: PDF
+#        url: https://example.org/paper.pdf
+#
+#  Source of record: https://dblp.org/pid/198/2549.xml — machine-readable, and
+#  what this file was generated from. dblp lists 11 records against these 9
+#  entries; the arXiv preprint of Xar-Trek and the Zenodo artifact for
+#  Aggregate VM are links on their papers rather than separate entries.
+# =============================================================================
+
+- year: 2024
+  title: "Offloading Datacenter Jobs to RISC-V Hardware for Improved Performance and Power Efficiency"
+  authors: "Balvansh Heerekar, Cesar Philippidis, **Ho-Ren (Jack) Chuang**, Pierre Olivier, Antonio Barbalace, Binoy Ravindran"
+  venue: "SYSTOR '24"
+  kind: Conference
+  links:
+    - name: DOI
+      url: https://doi.org/10.1145/3688351.3689152
+
+- year: 2023
+  title: "Aggregate VM: Why Reduce or Evict VM's Resources When You Can Borrow Them From Other Nodes?"
+  authors: "**Ho-Ren (Jack) Chuang**, Karim Manaouil, Tong Xing, Antonio Barbalace, Pierre Olivier, Balvansh Heerekar, Binoy Ravindran"
+  venue: "EuroSys '23"
+  kind: Conference
+  links:
+    - name: DOI
+      url: https://doi.org/10.1145/3552326.3587452
+    - name: Artifact
+      url: https://doi.org/10.5281/zenodo.7738757
+
+- year: 2022
+  title: "On Optimizing and Leveraging Distributed Shared Memory for High Performance, Resource Aggregation, and Cache-coherent Heterogeneous-ISA Processors"
+  authors: "**Ho-Ren (Jack) Chuang**"
+  venue: "Ph.D. Dissertation, Virginia Tech"
+  kind: Thesis
+  links:
+    - name: VTechWorks
+      url: https://hdl.handle.net/10919/110968
+
+- year: 2021
+  title: "Xar-Trek: Run-time Execution Migration among FPGAs and Heterogeneous-ISA CPUs"
+  authors: "Edson Horta, **Ho-Ren (Jack) Chuang**, Naarayanan Rao V Sathish, Cesar Philippidis, Antonio Barbalace, Pierre Olivier, Binoy Ravindran"
+  venue: "Middleware '21"
+  kind: Conference
+  links:
+    - name: DOI
+      url: https://doi.org/10.1145/3464298.3493388
+    - name: arXiv
+      url: https://arxiv.org/abs/2110.14751
+
+- year: 2020
+  title: "Scaling Shared Memory Multiprocessing Applications in Non-cache-coherent Domains"
+  authors: "**Ho-Ren (Jack) Chuang**, Robert Lyerly, Stefan Lankes, Binoy Ravindran"
+  venue: "SYSTOR '20"
+  kind: Conference
+  links:
+    - name: DOI
+      url: https://doi.org/10.1145/3383669.3398278
+
+- year: 2020
+  title: "DeX: Scaling Applications Beyond Machine Boundaries"
+  authors: "Sang-Hoon Kim, **Ho-Ren (Jack) Chuang**, Robert Lyerly, Pierre Olivier, Changwoo Min, Binoy Ravindran"
+  venue: "ICDCS '20"
+  kind: Conference
+  links:
+    - name: DOI
+      url: https://doi.org/10.1109/ICDCS47774.2020.00021
+
+- year: 2017
+  title: "Breaking the Boundaries in Heterogeneous-ISA Datacenters"
+  authors: "Antonio Barbalace, Robert Lyerly, Christopher Jelesnianski, Anthony Carno, **Ho-Ren (Jack) Chuang**, Vincent Legout, Binoy Ravindran"
+  venue: "ASPLOS '17"
+  kind: Conference
+  links:
+    - name: DOI
+      url: https://doi.org/10.1145/3037697.3037738
+
+- year: 2017
+  title: "Transparent Fault-Tolerance Using Intra-Machine Full-Software-Stack Replication on Commodity Multicore Hardware"
+  authors: "Giuliano Losa, Antonio Barbalace, Yuzhong Wen, **Ho-Ren (Jack) Chuang**, Binoy Ravindran"
+  venue: "ICDCS '17"
+  kind: Conference
+  links:
+    - name: DOI
+      url: https://doi.org/10.1109/ICDCS.2017.140
+
+- year: 2017
+  title: "A Distributed Operating System Network Stack and Device Driver for Multicores"
+  authors: "Saif Ansary, Antonio Barbalace, **Ho-Ren (Jack) Chuang**, Thomas Lazor, Binoy Ravindran"
+  venue: "ICDCS '17"
+  kind: Conference
+  links:
+    - name: DOI
+      url: https://doi.org/10.1109/ICDCS.2017.90

@@ -1,0 +1,38 @@
+title: "Ho-Ren (Jack) Chuang"
+author: "Ho-Ren (Jack) Chuang"
+description: >-
+  Ho-Ren (Jack) Chuang — Ph.D. in Computer Engineering, Virginia Tech.
+  LLM inference frameworks, operating systems, virtualization,
+  distributed systems, and embedded systems.
+
+url: "https://jackchuang.github.io"
+baseurl: ""
+
+# ---- contact / profiles -------------------------------------------------
+email: horenc@vt.edu
+github_user: JackChuang
+linkedin_user: horenc
+orcid: "0000-0002-6703-8930"
+dblp_pid: "198/2549"          # dblp.org/pid/<this>.html — also serves .xml
+scholar_id: "0e3KuKwAAAAJ"    # scholar.google.com/citations?user=<this>
+cv_url: "https://drive.google.com/file/d/1tCNgNBl5PUW8LJK7iZMf0J0gSrbyw9tj/view"
+
+# ---- build --------------------------------------------------------------
+markdown: kramdown
+permalink: pretty
+sass:
+  style: compressed
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+exclude:
+  - README.md
+  - CLAUDE.md
+  - deploy.sh
+  - serve.sh
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .sass-cache

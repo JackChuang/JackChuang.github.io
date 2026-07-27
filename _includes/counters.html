@@ -1,0 +1,96 @@
+{%- comment -%}
+=============================================================================
+  VISITOR COUNTERS — MIGRATED FROM blogs.tlos.vt.edu/horenc
+=============================================================================
+  These are the SAME widget IDs as the old WordPress site, so all historical
+  counts carry over. Do not regenerate them.
+
+    Flag Counter   id  = pWhK      dashboard: https://s01.flagcounter.com/more/pWhK
+    ClustrMaps     site = 1bgq9    dashboard: https://clustrmaps.com/site/1bgq9
+
+  Five widgets, and where each one's display params came from:
+    mini       running total    — dashboard, 2026-07-27. In the panel header.
+    map        world map        — size_m from dashboard 2026-07-27,
+                                  pageviews_1/flags_1 kept from WordPress
+    count2     by country       — dashboard, 2026-07-27 (columns_6, maxflags_250)
+    count2_US  by US state      — dashboard, 2026-07-27 (columns_4, maxflags_250)
+    map_v2     ClustrMaps       — from the WordPress source
+
+  RULES — read before editing:
+   1. Never add loading="lazy" to these <img> tags. A lazily-loaded counter
+      only fires when scrolled into view, which silently under-counts.
+   2. Never add referrerpolicy="no-referrer". Both services use the referrer.
+   3. Changing colour params (bg_, txt_, border_, cl=) is safe.
+      Changing the ID (pWhK) or the ClustrMaps d= hash resets the count.
+   4. Flag Counter's dashboard hands out its embed code over http://. This
+      site is https-only, so always rewrite it to https:// before pasting.
+      An http:// <img src> would be blocked outright as mixed content.
+   5. s01 vs s11 is only which image server Flag Counter routes you to —
+      both serve the same counter. These match what the dashboard issued
+      on 2026-07-27. If a widget stops loading, re-copy from the dashboard.
+   6. pageviews_ / flags_ / viewers_ / labels_ / percent_ are DISPLAY toggles,
+      not tracking toggles. Setting them to _0 does not stop counting, it
+      just stops showing the number. The dashboard hands out _0 by default,
+      so pasting its code verbatim silently removes every visible total from
+      the site. The map widget is the only one here set to _1 — leave it.
+=============================================================================
+{%- endcomment -%}
+
+<section class="counters" aria-labelledby="visitors-heading">
+  <div class="counters__head">
+    <div class="counters__total">
+      <span class="label" id="visitors-heading">Visitors</span>
+      {%- comment -%} Flag Counter — mini. The plain running total, so it sits
+      next to the heading rather than down in the grid with the visualisations.
+      {%- endcomment -%}
+      <a href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
+        <img src="https://s01.flagcounter.com/mini/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/flags_0/"
+             alt="Total visitors" border="0" decoding="async">
+      </a>
+    </div>
+    <span class="label">Counting since 2016</span>
+  </div>
+
+  <div class="counters__grid">
+
+    {%- comment -%}
+      Flag Counter — world map.
+      size_m is from the dashboard (2026-07-27).
+      pageviews_1 / flags_1 are deliberately KEPT from the WordPress source:
+      this is the only one of the four widgets that renders a visible total.
+      Set either to _0 and the numbers vanish from the site — counting
+      continues, but nobody can see it.
+    {%- endcomment -%}
+    <a class="counters__cell--map" href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
+      <img src="https://s01.flagcounter.com/map/pWhK/size_m/txt_000000/border_CCCCCC/pageviews_1/viewers_0/flags_1/"
+           alt="Flag Counter map of visitor locations" border="0" decoding="async">
+    </a>
+
+    {%- comment -%} Flag Counter — flags by country {%- endcomment -%}
+    <a class="counters__cell--country" href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
+      <img src="https://s01.flagcounter.com/count2/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/columns_6/maxflags_250/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
+           alt="Flag Counter totals by country" border="0" decoding="async">
+    </a>
+
+    {%- comment -%} Flag Counter — US states {%- endcomment -%}
+    <a class="counters__cell--us" href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
+      <img src="https://s01.flagcounter.com/count2_US/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_250/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
+           alt="Flag Counter totals by US state" border="0" decoding="async">
+    </a>
+
+    {%- comment -%}
+      ClustrMaps: removed from the page 2026-07-27 because www.clustrmaps.com
+      would not accept a connection and the widget rendered as a broken image.
+      Nothing was deleted at clustrmaps.com — the map and its history remain.
+
+      The d= hash is not regenerable, so it is kept here. To restore the widget,
+      paste this back into the grid above unchanged:
+
+        <a href="https://clustrmaps.com/site/1bgq9" title="Visit tracker" target="_blank" rel="noopener">
+          <img src="https://www.clustrmaps.com/map_v2.png?d=VQmG81oa9-0SyWvtdUBeKemRDUOO55YE5AGRrEqkEG0&cl=ffffff"
+               alt="ClustrMaps visitor map" decoding="async">
+        </a>
+    {%- endcomment -%}
+
+  </div>
+</section>
