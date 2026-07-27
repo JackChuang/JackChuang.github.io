@@ -36,7 +36,13 @@
 =============================================================================
 {%- endcomment -%}
 
-<section class="counters" aria-labelledby="visitors-heading">
+{%- comment -%}
+  aria-label rather than aria-labelledby: the visible "Visitors" heading was
+  removed to give the column its width back, and a labelledby pointing at an
+  element that no longer exists leaves the section with no accessible name at
+  all. The name lives in the attribute now.
+{%- endcomment -%}
+<section class="counters" aria-label="Visitors">
   <div class="counters__grid">
 
     {%- comment -%}
@@ -58,11 +64,34 @@
            alt="Flag Counter totals by country" border="0" decoding="async">
     </a>
 
-    {%- comment -%} Flag Counter — US states {%- endcomment -%}
-    <a class="counters__cell--us" href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
-      <img src="https://s01.flagcounter.com/count2_US/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_250/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
-           alt="Flag Counter totals by US state" border="0" decoding="async">
-    </a>
+    {%- comment -%}
+      Third column: the running total, with the US-states widget beneath it.
+      That widget is the shortest of the three, so the space under it was dead
+      — the map beside it is far taller. Filling that column instead of giving
+      the total a fourth column of its own returns the width to the widgets,
+      which is why all three are ~29% larger than they were.
+
+      Markup order is the visual order on purpose, rather than reordering with
+      CSS: a screen reader follows the document, and a total that reads before
+      its widgets in one and after them in the other is just confusing.
+    {%- endcomment -%}
+    <div class="counters__stack">
+      <div class="counters__head">
+        <span class="label">Counting since 2016</span>
+        <div class="counters__total">
+          {%- comment -%} Flag Counter — mini. The plain running total. {%- endcomment -%}
+          <a href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
+            <img src="https://s01.flagcounter.com/mini/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/flags_0/"
+                 alt="Total visitors" border="0" decoding="async">
+          </a>
+        </div>
+      </div>
+
+      {%- comment -%} Flag Counter — US states {%- endcomment -%}
+      <a class="counters__cell--us" href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
+        <img src="https://s01.flagcounter.com/count2_US/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_250/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
+             alt="Flag Counter totals by US state" border="0" decoding="async">
+      </a>
 
     {%- comment -%}
       ClustrMaps: removed from the page 2026-07-27 because www.clustrmaps.com
@@ -77,24 +106,6 @@
                alt="ClustrMaps visitor map" decoding="async">
         </a>
     {%- endcomment -%}
-
-    {%- comment -%}
-      Inside the grid, as a fourth column rather than a band of its own beneath
-      it. As a full-width row it was mostly empty — two short strings pushed to
-      opposite edges with nothing between them — and it cost a whole horizontal
-      strip to say two things. Set narrow and stacked, it fills the space the
-      widths of the three widgets leave over.
-    {%- endcomment -%}
-    <div class="counters__head">
-      <div class="counters__total">
-        <span class="label" id="visitors-heading">Visitors</span>
-        {%- comment -%} Flag Counter — mini. The plain running total. {%- endcomment -%}
-        <a href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
-          <img src="https://s01.flagcounter.com/mini/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/flags_0/"
-               alt="Total visitors" border="0" decoding="async">
-        </a>
-      </div>
-      <span class="label">Counting since 2016</span>
     </div>
 
   </div>

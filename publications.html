@@ -31,23 +31,40 @@ description: Peer-reviewed papers by Ho-Ren (Jack) Chuang on operating systems, 
     control ordering within a single year (three of these are 2017). Re-adding
     `sort: "year" | reverse` would silently reverse same-year entries.
   {%- endcomment -%}
+  {%- comment -%}
+    No rail on this page. It carried the year and the kind, and the venue line
+    inside every entry already says both — "EuroSys '23" is the year, and the
+    venue is what makes it a conference paper. An index that repeats what is
+    two lines to its right is not an index, it is a second copy.
+  {%- endcomment -%}
   {% for pub in site.data.publications %}
-  <div class="row">
-    <div class="row__rail">
-      <span class="year">{{ pub.year }}</span>
-      {% if pub.kind %}<span class="meta">{{ pub.kind }}</span>{% endif %}
-    </div>
+  <div class="row row--plain">
     <div class="row__body">
-      <h2>{{ pub.title }}</h2>
+      {%- comment -%}
+        The title is the link, and it goes to the full text — the free author
+        copy where one exists, otherwise the publisher. A reader who wants the
+        paper should not have to find the right item in a row of small links
+        underneath, and should not be dropped at a paywall when a free copy is
+        a URL away.
+      {%- endcomment -%}
+      {%- assign primary = pub.pdf -%}
+      {%- unless primary -%}{%- if pub.links -%}{%- assign primary = pub.links[0].url -%}{%- endif -%}{%- endunless -%}
+      <h2>
+        {%- if primary -%}
+          <a href="{{ primary }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+        {%- else -%}
+          {{ pub.title }}
+        {%- endif -%}
+      </h2>
       <span class="cite">
         {{ pub.authors | markdownify | remove: '<p>' | remove: '</p>' | strip }}<br>
-        <em>{{ pub.venue }}</em>
+        {%- comment -%}
+          Short venue on the page, full proceedings name in the tooltip. Anyone
+          in systems reads "EuroSys '23" instantly; anyone outside it reads
+          nothing at all, and spelling it out inline would bury the papers.
+        {%- endcomment -%}
+        <em>{% if pub.venue_full %}<abbr title="{{ pub.venue_full }}">{{ pub.venue }}</abbr>{% else %}{{ pub.venue }}{% endif %}</em>{% if pub.links %}<span class="reflinks">{% for link in pub.links %}<a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a>{% endfor %}</span>{% endif %}
       </span>
-      {% if pub.links %}
-      <div class="links">
-        {% for link in pub.links %}<a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a>{% endfor %}
-      </div>
-      {% endif %}
     </div>
   </div>
   {% endfor %}

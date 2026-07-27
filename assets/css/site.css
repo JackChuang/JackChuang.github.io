@@ -339,6 +339,10 @@ hr.rule {
 }
 .row:first-of-type { border-top: 1px solid var(--ink); }
 
+/* A row with no rail. Single column, so the body starts at the left margin
+   instead of leaving a 148px gutter with nothing in it. */
+.row--plain { grid-template-columns: minmax(0, 1fr); }
+
 .row__rail { padding-top: 0.3rem; }
 .row__rail .label { display: block; }
 .row__rail .year {
@@ -388,6 +392,44 @@ hr.rule {
 }
 .cite em { font-style: normal; color: var(--ink); }
 
+/* Venue abbreviations carry the full proceedings name in title=. The dotted
+   rule is the signal that there is something to hover; without it nobody finds
+   the tooltip, and a tooltip nobody finds is the same as no tooltip. */
+.cite abbr {
+  text-decoration: none;
+  border-bottom: 1px dotted var(--rule-strong);
+  cursor: help;
+}
+
+/* Reference links, set on the venue line: EuroSys '23 [ACM] [Code] [Artifact].
+   They belong beside the venue rather than in a row of their own — they say
+   where this paper lives, which is the same question the venue answers.
+
+   Brackets are ::before/::after rather than characters in the markup, so the
+   link's accessible name stays "ACM" and the punctuation is decoration. No
+   underline and no uppercasing either: at three or four per entry, the
+   treatment used elsewhere for standalone links would out-shout the titles. */
+.reflinks { margin-left: 0.55rem; }
+.reflinks a {
+  border-bottom: 0;
+  color: var(--ink-mid);
+  margin-right: 0.3em;
+}
+.reflinks a::before { content: "["; color: var(--ink-soft); }
+.reflinks a::after  { content: "]"; color: var(--ink-soft); }
+.reflinks a:hover { color: var(--accent); }
+
+/* The paper title is the primary link. Underlining it the way body links are
+   underlined would put a rule under a whole heading, so it is marked by weight
+   and colour instead, and takes the accent on hover. */
+.row__body h2 a,
+.row__body h3 a {
+  color: inherit;
+  border-bottom: 0;
+}
+.row__body h2 a:hover,
+.row__body h3 a:hover { color: var(--accent); }
+
 /* Inline brand mark sitting before a link's label. Sized in em so it tracks
    whatever type it is set beside, and nudged down off the baseline so its
    optical centre lines up with lowercase rather than sitting high. */
@@ -431,18 +473,15 @@ hr.rule {
   border: 1px solid var(--rule);
   padding: 1.5rem;
 }
-/* A fourth column inside the grid, not a band beneath it.
-   flex: 0 1 auto — it takes only the width its own content needs and hands the
-   rest back to the three widgets, whose relative sizes are what the panel is
-   for. Stacked narrow is the point: laid out horizontally these two short
-   strings spanned the full width with a void between them and cost a whole
-   horizontal strip to say very little. */
+/* Sits under the US-states widget, inside the third column — not in a column of
+   its own and not in a band beneath the row. The mini counter is 160px wide, so
+   a column that holds it comfortably is far narrower than one that would have
+   to hold a flag grid. */
 .counters__head {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.55rem;
-  flex: 0 1 auto;
   max-width: 170px;
 }
 .counters__total {
@@ -463,24 +502,39 @@ hr.rule {
   gap: 1.75rem 2rem;
   align-items: flex-start;
 }
-.counters__grid a {
-  display: block;
-  border-bottom: 0;
+.counters__grid a { display: block; border-bottom: 0; }
+
+/* Only direct children are columns. The child combinator matters: the US anchor
+   now lives inside .counters__stack, which lays out vertically, so giving it
+   flex properties here would size its HEIGHT rather than its width. */
+.counters__grid > a,
+.counters__grid > .counters__stack {
   flex: 1 1 0;
-  min-width: 210px;   /* below this they wrap rather than shrink to illegible */
+  min-width: 120px;   /* below this they wrap rather than shrink to illegible */
 }
 
-/* The grow numbers are the widgets' real pixel widths, measured from the PNGs
-   Flag Counter actually serves (600 / 470 / 333). Sizing them in that ratio
-   makes all three render at one identical scale factor, so none is squashed
-   harder than its neighbours — which is also why the middle one comes out
-   ~1.4x the right-hand one rather than the 1.5x its 6-vs-4 columns suggest:
-   the columns are the same width, but the surrounding chrome is not.
-   max-width caps each at native size so a wide viewport never upscales and
-   blurs them. */
-.counters__grid a.counters__cell--map     { flex-grow: 600; max-width: 600px; }
-.counters__grid a.counters__cell--country { flex-grow: 470; max-width: 470px; }
-.counters__grid a.counters__cell--us      { flex-grow: 333; max-width: 333px; }
+/* These grow numbers are an editorial judgement, not a measurement.
+   They started as the widgets' real pixel widths (600 / 470 / 333), which made
+   every widget render at one identical scale — fair, but it sized them by how
+   big Flag Counter happens to draw them rather than by how much they matter.
+   Countries-of-the-world is the one worth reading; US states is a subset of it
+   and earns roughly half the room.
+
+   max-width caps each at its native size so a wide viewport never upscales and
+   blurs them — except the US column, capped deliberately below native so it
+   stays the quiet one no matter how wide the window gets. */
+.counters__grid > a.counters__cell--map     { flex-grow: 560; max-width: 600px; }
+.counters__grid > a.counters__cell--country { flex-grow: 520; max-width: 470px; }
+.counters__grid > .counters__stack          { flex-grow: 250; max-width: 260px; }
+
+/* The third column: US-states widget with the running total beneath it. */
+.counters__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.4rem;
+}
+.counters__stack .counters__cell--us { width: 100%; }
 .counters__grid img {
   display: block;
   max-width: 100%;
