@@ -388,6 +388,16 @@ hr.rule {
 }
 .cite em { font-style: normal; color: var(--ink); }
 
+/* Inline brand mark sitting before a link's label. Sized in em so it tracks
+   whatever type it is set beside, and nudged down off the baseline so its
+   optical centre lines up with lowercase rather than sitting high. */
+.ico {
+  width: 1.05em;
+  height: 1.05em;
+  vertical-align: -0.19em;
+  margin-right: 0.4em;
+}
+
 .links {
   display: flex;
   flex-wrap: wrap;
@@ -415,18 +425,25 @@ hr.rule {
   border: 1px solid var(--rule);
   padding: 1.5rem;
 }
+/* A fourth column inside the grid, not a band beneath it.
+   flex: 0 1 auto — it takes only the width its own content needs and hands the
+   rest back to the three widgets, whose relative sizes are what the panel is
+   for. Stacked narrow is the point: laid out horizontally these two short
+   strings spanned the full width with a void between them and cost a whole
+   horizontal strip to say very little. */
 .counters__head {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  flex: 0 1 auto;
+  max-width: 170px;
 }
 .counters__total {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
 }
 .counters__total a { border-bottom: 0; display: block; }
 .counters__total img { display: block; max-width: 100%; height: auto; }
@@ -477,6 +494,18 @@ hr.rule {
   margin-top: 1.75rem;
 }
 .colophon a { border-bottom-color: var(--rule-strong); }
+
+/* Contact, on every page. Set a size up from the copyright line beside it —
+   these are meant to be used, that one is only meant to be there. */
+.colophon__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1.35rem;
+  font-family: var(--mono);
+  font-size: 0.78125rem;
+  color: var(--ink-mid);
+}
 
 /* ---------- responsive --------------------------------------------------- */
 

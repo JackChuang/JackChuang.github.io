@@ -37,20 +37,6 @@
 {%- endcomment -%}
 
 <section class="counters" aria-labelledby="visitors-heading">
-  <div class="counters__head">
-    <div class="counters__total">
-      <span class="label" id="visitors-heading">Visitors</span>
-      {%- comment -%} Flag Counter — mini. The plain running total, so it sits
-      next to the heading rather than down in the grid with the visualisations.
-      {%- endcomment -%}
-      <a href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
-        <img src="https://s01.flagcounter.com/mini/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/flags_0/"
-             alt="Total visitors" border="0" decoding="async">
-      </a>
-    </div>
-    <span class="label">Counting since 2016</span>
-  </div>
-
   <div class="counters__grid">
 
     {%- comment -%}
@@ -91,6 +77,25 @@
                alt="ClustrMaps visitor map" decoding="async">
         </a>
     {%- endcomment -%}
+
+    {%- comment -%}
+      Inside the grid, as a fourth column rather than a band of its own beneath
+      it. As a full-width row it was mostly empty — two short strings pushed to
+      opposite edges with nothing between them — and it cost a whole horizontal
+      strip to say two things. Set narrow and stacked, it fills the space the
+      widths of the three widgets leave over.
+    {%- endcomment -%}
+    <div class="counters__head">
+      <div class="counters__total">
+        <span class="label" id="visitors-heading">Visitors</span>
+        {%- comment -%} Flag Counter — mini. The plain running total. {%- endcomment -%}
+        <a href="https://s01.flagcounter.com/more/pWhK" target="_blank" rel="noopener">
+          <img src="https://s01.flagcounter.com/mini/pWhK/bg_FFFFFF/txt_000000/border_CCCCCC/flags_0/"
+               alt="Total visitors" border="0" decoding="async">
+        </a>
+      </div>
+      <span class="label">Counting since 2016</span>
+    </div>
 
   </div>
 </section>

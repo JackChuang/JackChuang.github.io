@@ -27,11 +27,12 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
+# Kept out of the built site. "*.md" rather than a list of filenames: every page
+# here is .html, so no Markdown is ever content, and naming the local-only notes
+# files individually would put their names in a public repo for no reason.
 exclude:
-  - README.md
-  - CLAUDE.md
-  - deploy.sh
-  - serve.sh
+  - "*.md"
+  - "*.sh"
   - Gemfile
   - Gemfile.lock
   - vendor
