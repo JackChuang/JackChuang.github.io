@@ -391,6 +391,12 @@ hr.rule {
 /* Inline brand mark sitting before a link's label. Sized in em so it tracks
    whatever type it is set beside, and nudged down off the baseline so its
    optical centre lines up with lowercase rather than sitting high. */
+/* The em sizing here is what you actually see; the width/height attributes on
+   the <svg> elements are the floor. An inline <svg> with only a viewBox has no
+   intrinsic size, so if this stylesheet is late, cached stale or blocked, the
+   browser falls back to the default replaced-element box — 300x150 — and three
+   enormous glyphs land in the footer. The attributes make that failure mode
+   16px instead. CSS still wins, so scaling with the type is unaffected. */
 .ico {
   width: 1.05em;
   height: 1.05em;
