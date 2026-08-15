@@ -1,16 +1,198 @@
 ---
 layout: default
-title: Research Projects
+title: Projects
 permalink: /projects/
-description: Systems research projects by Ho-Ren (Jack) Chuang — operating systems, virtualization, distributed systems, and LLM inference.
+description: Open-source work by Ho-Ren (Jack) Chuang on SGLang and vLLM — LLM inference kernels, KV-cache quantization, sparse attention, and CUDA-free inference with Triton.
 ---
 
+{%- comment -%}
+  One block per repository, each complete in itself, grouped inside by the
+  roadmap or document the work belongs to.
+
+  Titles are verbatim from GitHub and from the article. Do not paraphrase them:
+  the originals carry the model names and the [DSA] / [Kernel] / [Perf] tags,
+  and a reader comparing this page to the repo should find the same string in
+  both places.
+
+  No merged/open labels on individual lines. The count line at the top of each
+  block states the split once, which keeps the page accurate without tagging
+  thirteen rows.
+
+  The CUDA-free Triton effort spans both repos, so the article that heads it is
+  linked from both rather than given a block of its own — that keeps each
+  repository readable in one pass.
+
+  GROUPING EVIDENCE — established, not inferred from titles looking alike:
+    #25751, #30514, #31888 each reference roadmap #25746 in their PR body, and
+      #25746 names #32327 as PR4. #20606 is grouped there by subject, being the
+      NSA sparse prefill path; it carries no reference.
+    #10078 and #12612 reference roadmap #10083, whose body names #10078.
+      #13547 and #12596 chain to those two; same workstream, confirmed by Jack.
+    The article states its own scope: "We are currently working towards
+      upstreaming this work to the SGLang repo #4792 and the vLLM repo #13319
+      #13963."
+    MoE and speculative items are grouped by subject; no cross-references.
+
+  Counts are collected from the GitHub API and reconciled against the API's own
+  total_count, so a rate-limited run cannot quietly report a partial figure as
+  a complete one. Last checked 2026-08-15. Re-collect before changing any
+  number here rather than editing it by hand.
+{%- endcomment -%}
+
+{%- assign sg = "https://github.com/sgl-project/sglang" -%}
+{%- assign vl = "https://github.com/vllm-project/vllm" -%}
+{%- assign article = "https://opensource.bytedance.com/blogDetail/103" -%}
+
 <div class="pagehead">
-  <h1>Research Projects</h1>
-  <p>WIP&hellip;</p>
+  <h1>Projects</h1>
 </div>
 
+<h2 class="section">Open source</h2>
+
+<div class="row row--plain">
+  <div class="row__body">
+    <h2><a href="{{ sg }}" target="_blank" rel="noopener">SGLang</a></h2>
+    <span class="cite">
+      LLM inference kernels, KV-cache quantization, sparse attention &middot;
+      <strong>11 merged pull requests</strong> since November 2025, two more in review
+      {%- comment -%}
+        Three links, because one query cannot cover it. GitHub's issue search
+        has no OR between qualifiers, and author: does not match a
+        Co-authored-by trailer — so a reader clicking "All" would never see
+        #32327. involves: does reach it, but also drags in pull requests only
+        commented on, which would overstate the record. A separate, exact
+        co-authored query is the honest way to make it visible.
+      {%- endcomment -%}
+      <span class="reflinks">
+        <a href="{{ sg }}/pulls?q=is%3Apr+author%3AJackChuang+is%3Amerged" target="_blank" rel="noopener">Merged</a>
+        <a href="{{ sg }}/pulls?q=is%3Apr+author%3AJackChuang" target="_blank" rel="noopener">All</a>
+        <a href="{{ sg }}/pulls?q=is%3Apr+%22Co-authored-by%3A+JackChuang%22" target="_blank" rel="noopener">Co-authored</a>
+      </span>
+    </span>
+
+    <ul class="detail" style="margin-top:1rem">
+      <li>
+        <strong>Sparse MLA prefill</strong> &mdash;
+        <a href="{{ sg }}/issues/25746" target="_blank" rel="noopener">[Feature] SM90 Q8KV8 FP8 Sparse MLA Prefill Kernel and SGLang NSA Runtime Integration</a>
+        &nbsp;<span class="label">roadmap I opened</span>
+        <ul>
+          <li>[Kernel] Add SM90 Q8KV8 FP8 Sparse MLA Prefill JIT Kernel with Tests and Benchmark &middot;
+              <a href="{{ sg }}/pull/25751" target="_blank" rel="noopener">#25751</a></li>
+          <li>[DSA] Integrate Q8KV8 FP8 Sparse MLA Prefill into the DSA Backend (DeepSeek-V3.2) &middot;
+              <a href="{{ sg }}/pull/30514" target="_blank" rel="noopener">#30514</a></li>
+          <li>[DSA] Q8KV8 FP8 Sparse Prefill on GLM-5.2 &amp; DeepSeek-V3.2: Q8-Path &amp; Shared-Path Optimizations &middot;
+              <a href="{{ sg }}/pull/31888" target="_blank" rel="noopener">#31888</a></li>
+          <li>[DeepSeek-V4] Add Q8KV8 sparse MLA prefill runtime backend &middot;
+              <a href="{{ sg }}/pull/32327" target="_blank" rel="noopener">#32327</a>
+              &nbsp;<span class="label">co-author</span></li>
+          <li>FIX: (NSA) Compute topk_indices_offset when NSA prefill flashmla_sparse is used with FP8 KV cache &middot;
+              <a href="{{ sg }}/pull/20606" target="_blank" rel="noopener">#20606</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>KV-cache quantization</strong> &mdash;
+        <a href="{{ sg }}/issues/10083" target="_blank" rel="noopener">[Feature] Multiple KVCache Quantization Enhancements</a>
+        &nbsp;<span class="label">roadmap</span>
+        <ul>
+          <li>feat: Add FP4 (E2M1) KV Cache Support with Quantization Utilities for MLA &middot;
+              <a href="{{ sg }}/pull/10078" target="_blank" rel="noopener">#10078</a></li>
+          <li>feat: Add FP4 (E2M1) KV Cache Support for MHA &middot;
+              <a href="{{ sg }}/pull/12612" target="_blank" rel="noopener">#12612</a></li>
+          <li>Refactor MHA &amp; MLA KV caches to support FP4 &middot;
+              <a href="{{ sg }}/pull/13547" target="_blank" rel="noopener">#13547</a></li>
+          <li>Support kv8 (FP8) with torch_native attention backend &middot;
+              <a href="{{ sg }}/pull/12596" target="_blank" rel="noopener">#12596</a></li>
+          <li>Check KV4 compatibility with attention backends and add KV4 support to the attention_backend doc &middot;
+              <a href="{{ sg }}/pull/14467" target="_blank" rel="noopener">#14467</a></li>
+          <li>Add KV4-capable backend flashmla and update server args &middot;
+              <a href="{{ sg }}/pull/14989" target="_blank" rel="noopener">#14989</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>MoE quantization</strong>
+        <ul>
+          <li>[Perf][Kernel] Fuse SiLU+Mul into NVFP4 Expert Quantization for CUTLASS MoE &middot;
+              <a href="{{ sg }}/pull/18612" target="_blank" rel="noopener">#18612</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Speculative decoding</strong>
+        <ul>
+          <li>[Speculative] Derive the speculative max_running_requests default from the decode CUDA-graph ladder &middot;
+              <a href="{{ sg }}/pull/34290" target="_blank" rel="noopener">#34290</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>CUDA-free inference</strong> &mdash;
+        <a href="{{ article }}" target="_blank" rel="noopener">Enabling CUDA-Free Support for vLLM Inference Using Triton Kernels</a>
+        &nbsp;<span class="label">article, first author</span>
+        <ul>
+          <li>Support non-attention path operators in Triton &middot;
+              <a href="{{ sg }}/pull/4792" target="_blank" rel="noopener">#4792</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row row--plain">
+  <div class="row__body">
+    <h2><a href="{{ vl }}" target="_blank" rel="noopener">vLLM</a></h2>
+    <span class="cite">
+      Triton execution path, CUTLASS MoE FP8
+      <span class="reflinks">
+        <a href="{{ vl }}/pulls?q=is%3Apr+author%3AJackChuang" target="_blank" rel="noopener">PRs</a>
+        <a href="{{ vl }}/issues?q=is%3Aissue+author%3AJackChuang" target="_blank" rel="noopener">Issues</a>
+      </span>
+    </span>
+
+    <ul class="detail" style="margin-top:1rem">
+      <li>
+        <strong>CUDA-free inference</strong> &mdash;
+        <a href="{{ article }}" target="_blank" rel="noopener">Enabling CUDA-Free Support for vLLM Inference Using Triton Kernels</a>
+        &nbsp;<span class="label">article, first author</span>
+        <ul>
+          <li>[RFC]: Introduce a Triton-only Transformer Execution Path in vLLM &middot;
+              <a href="{{ vl }}/issues/13319" target="_blank" rel="noopener">#13319</a></li>
+          <li>Support non-attention path operators in Triton &middot;
+              <a href="{{ vl }}/pull/13963" target="_blank" rel="noopener">#13963</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>MoE quantization</strong>
+        <ul>
+          <li>Add Cutlass integration for MoE FP8 &middot;
+              <a href="{{ vl }}/pull/19843" target="_blank" rel="noopener">#19843</a></li>
+          <li>[Bug]: Unexpected Memory Usage in cutlass_moe_fp8() on Latest main 6bc7b57 &middot;
+              <a href="{{ vl }}/issues/19923" target="_blank" rel="noopener">#19923</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row row--plain">
+  <div class="row__body">
+    <span class="cite">
+      <a href="{{ article }}" target="_blank" rel="noopener">Enabling CUDA-Free Support for vLLM Inference Using Triton Kernels</a><br>
+      <strong>Ho-Ren (Jack) Chuang</strong>, Tony Zhang, Yichen Wang, Zixuan Zhang, Deepak Vij, Xiaoning Ding<br>
+      <em>ByteDance Open Source</em>, April 2025
+    </span>
+  </div>
+</div>
+
+{%- comment -%}
+  Research projects render from _data/projects.yml. The heading is inside the
+  conditional so an empty data file leaves no orphaned section rule behind.
+{%- endcomment -%}
 {% if site.data.projects and site.data.projects.size > 0 %}
+
+<h2 class="section">Research</h2>
 
   {% for proj in site.data.projects %}
   <div class="row">
@@ -19,7 +201,7 @@ description: Systems research projects by Ho-Ren (Jack) Chuang — operating sys
       {% if proj.role %}<span class="meta">{{ proj.role }}</span>{% endif %}
     </div>
     <div class="row__body">
-      <h2>{{ proj.name }}</h2>
+      <h3>{{ proj.name }}</h3>
       {{ proj.summary | markdownify }}
       {% if proj.stack %}
       <div class="domains">
