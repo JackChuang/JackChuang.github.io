@@ -3,6 +3,7 @@ layout: default
 title: Projects
 permalink: /projects/
 description: Open-source work by Ho-Ren (Jack) Chuang on SGLang and vLLM — LLM inference kernels, KV-cache quantization, sparse attention, and CUDA-free inference with Triton.
+updated: 2026-08-15
 ---
 
 {%- comment -%}
@@ -35,8 +36,14 @@ description: Open-source work by Ho-Ren (Jack) Chuang on SGLang and vLLM — LLM
 
   Counts are collected from the GitHub API and reconciled against the API's own
   total_count, so a rate-limited run cannot quietly report a partial figure as
-  a complete one. Last checked 2026-08-15. Re-collect before changing any
-  number here rather than editing it by hand.
+  a complete one. Re-collect before changing any number here rather than
+  editing it by hand.
+
+  The date lives in `updated:` in the front matter and is printed at the foot
+  of this section. It is the one place to change it: a page that claims to be
+  current while the counts are months old is worse than one that says when it
+  was last read. Move it in the same edit that changes a number, never on its
+  own.
 {%- endcomment -%}
 
 {%- assign sg = "https://github.com/sgl-project/sglang" -%}
@@ -185,6 +192,11 @@ description: Open-source work by Ho-Ren (Jack) Chuang on SGLang and vLLM — LLM
     </span>
   </div>
 </div>
+
+<p class="stamp">
+  Pull requests and issues above last checked
+  <time datetime="{{ page.updated | date: '%Y-%m-%d' }}">{{ page.updated | date: '%-d %B %Y' }}</time>.
+</p>
 
 {%- comment -%}
   Research projects render from _data/projects.yml. The heading is inside the
