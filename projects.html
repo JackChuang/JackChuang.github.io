@@ -54,9 +54,22 @@ updated: 2026-08-15
   <h1>Projects</h1>
 </div>
 
-<h2 class="section">Open source</h2>
+{%- comment -%}
+  A group label only earns its place when there is a second group to tell it
+  apart from. With _data/projects.yml empty, "Open source" sat one line under
+  "Projects" naming the only thing on the page — the title had already said it.
 
-<div class="row row--plain">
+  So it is tied to the same condition as the Research heading below rather than
+  deleted: add entries to projects.yml and both labels appear together, which is
+  the moment either of them means anything. `grouped` is what that condition is
+  called in both places, so they cannot drift apart.
+{%- endcomment -%}
+{%- assign grouped = false -%}
+{%- if site.data.projects and site.data.projects.size > 0 -%}{%- assign grouped = true -%}{%- endif -%}
+
+{% if grouped %}<h2 class="section">Open source</h2>{% endif %}
+
+<div class="row row--plain{% unless grouped %} row--lead{% endunless %}">
   <div class="row__body">
     <h2><a href="{{ sg }}" target="_blank" rel="noopener">SGLang</a></h2>
     <span class="cite">
@@ -202,7 +215,7 @@ updated: 2026-08-15
   Research projects render from _data/projects.yml. The heading is inside the
   conditional so an empty data file leaves no orphaned section rule behind.
 {%- endcomment -%}
-{% if site.data.projects and site.data.projects.size > 0 %}
+{% if grouped %}
 
 <h2 class="section">Research</h2>
 

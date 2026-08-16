@@ -374,6 +374,19 @@ hr.rule {
    instead of leaving a 148px gutter with nothing in it. */
 .row--plain { grid-template-columns: minmax(0, 1fr); }
 
+/* A row that opens the page directly under its title, with no group label in
+   between. Same reasoning as `.pagehead + .section`: the rule at the top of a
+   first row separates it from what came before, and under an <h1> nothing did.
+
+   Applied as a class rather than written as `.pagehead + .row`, because that
+   selector would also catch the first entry on Publications — and there the
+   pagehead carries the profile links below the title, so the rule is doing
+   real work, separating those from the papers. */
+.row.row--lead {
+  border-top: 0;
+  padding-top: 0;
+}
+
 .row__rail { padding-top: 0.3rem; }
 .row__rail .label { display: block; }
 .row__rail .year {
