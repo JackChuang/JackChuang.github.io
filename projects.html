@@ -50,6 +50,30 @@ updated: 2026-08-15
 {%- assign vl = "https://github.com/vllm-project/vllm" -%}
 {%- assign article = "https://opensource.bytedance.com/blogDetail/103" -%}
 
+{%- comment -%}
+  "his work in this repo", authored or co-authored, as one search clause:
+  (author:JackChuang OR "Co-authored-by: JackChuang"), percent-encoded.
+
+  author: alone under-reports, because it does not match a Co-authored-by
+  trailer. involves: over-reports, because it also returns pull requests he
+  only commented on. Only the union of the two exact conditions is his record.
+
+  ⚠️ THE PATH IS LOAD-BEARING: /issues?q=, not /pulls?q=. Parenthesised OR is
+  only understood by the newer advanced search, which backs the /issues route.
+  Measured on 2026-08-16, same query on each surface:
+
+      /issues?q=   → 14  ✅ exactly the union
+      /pulls?q=    →  1  ✗ OR taken as free text
+      /search?type=pullrequests → 1  ✗ same
+      REST /search/issues       →  0  ✗ same
+
+  `is:pr` keeps the /issues route to pull requests, so the result set is right
+  even though the page furniture says Issues. Re-measure before switching the
+  path back; a link that silently returns 1 of 14 looks exactly like a link
+  that works.
+{%- endcomment -%}
+{%- assign mine = "%28author%3AJackChuang+OR+%22Co-authored-by%3A+JackChuang%22%29" -%}
+
 <div class="pagehead">
   <h1>Projects</h1>
 </div>
@@ -76,17 +100,15 @@ updated: 2026-08-15
       LLM inference kernels, KV-cache quantization, sparse attention &middot;
       <strong>11 merged pull requests</strong> since November 2025, two more in review
       {%- comment -%}
-        Three links, because one query cannot cover it. GitHub's issue search
-        has no OR between qualifiers, and author: does not match a
-        Co-authored-by trailer — so a reader clicking "All" would never see
-        #32327. involves: does reach it, but also drags in pull requests only
-        commented on, which would overstate the record. A separate, exact
-        co-authored query is the honest way to make it visible.
+        Two links, not three. "All" now means all — co-authored pull requests
+        are inside it, so the separate [Co-authored] link that existed to
+        compensate for author: missing them has nothing left to reveal.
+
+        All first: it is the whole set, and Merged is a subset of it.
       {%- endcomment -%}
       <span class="reflinks">
-        <a href="{{ sg }}/pulls?q=is%3Apr+author%3AJackChuang+is%3Amerged" target="_blank" rel="noopener">Merged</a>
-        <a href="{{ sg }}/pulls?q=is%3Apr+author%3AJackChuang" target="_blank" rel="noopener">All</a>
-        <a href="{{ sg }}/pulls?q=is%3Apr+%22Co-authored-by%3A+JackChuang%22" target="_blank" rel="noopener">Co-authored</a>
+        <a href="{{ sg }}/issues?q=is%3Apr+{{ mine }}" target="_blank" rel="noopener">All</a>
+        <a href="{{ sg }}/issues?q=is%3Apr+is%3Amerged+{{ mine }}" target="_blank" rel="noopener">Merged</a>
       </span>
     </span>
 
@@ -164,8 +186,15 @@ updated: 2026-08-15
     <h2><a href="{{ vl }}" target="_blank" rel="noopener">vLLM</a></h2>
     <span class="cite">
       Triton execution path, CUTLASS MoE FP8
+      {%- comment -%}
+        Same union clause as the SGLang block, so "his pull requests" means the
+        same thing in both places. It returns the same 2 today — there is no
+        co-authored vLLM pull request yet — but the definition is now the one
+        that stays correct when there is. Issues keeps plain author:, since
+        Co-authored-by is a commit trailer and an issue has no commits.
+      {%- endcomment -%}
       <span class="reflinks">
-        <a href="{{ vl }}/pulls?q=is%3Apr+author%3AJackChuang" target="_blank" rel="noopener">PRs</a>
+        <a href="{{ vl }}/issues?q=is%3Apr+{{ mine }}" target="_blank" rel="noopener">PRs</a>
         <a href="{{ vl }}/issues?q=is%3Aissue+author%3AJackChuang" target="_blank" rel="noopener">Issues</a>
       </span>
     </span>
