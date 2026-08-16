@@ -328,6 +328,19 @@ hr.rule {
   padding-top: 1.5rem;
   border-top: 1px solid var(--ink);
 }
+/* A section opening straight after the page title needs neither the rule nor
+   the space. The rule is there to separate one group from the group above it,
+   and directly under an <h1> there is no group above — it only draws a line
+   between a title and its own first section. The three gaps also stacked:
+   pagehead's 2.25rem, the section's 3.25rem margin and its 1.5rem padding came
+   to 7rem of nothing between "Projects" and the first word under it.
+   Mid-page sections (Education, Beyond work, Research) keep both. */
+.pagehead + .section {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
 /* the label already draws the rule, so the row under it must not draw another */
 .section + .row {
   border-top: 0;
