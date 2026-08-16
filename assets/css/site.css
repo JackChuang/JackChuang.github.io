@@ -196,11 +196,17 @@ hr.rule {
   flex-wrap: wrap;
   gap: 0.4rem 0.5rem;
 }
+/* Neutral is the default here, and the accent is the exception — the reverse
+   of how this started. These tags are mostly past work, and setting past work
+   in the same oxblood as current work reads as an endorsement of it.
+   ink-mid on rule measures 4.64:1, which clears AA for small text; ink-soft
+   would have been quieter still at 2.35:1, and unreadable. Muted is the goal,
+   faint is not. */
 .domains span {
   display: inline-block;
   padding: 0.15rem 0.5rem;
-  background: var(--accent-tint);
-  color: var(--accent);
+  background: var(--rule);
+  color: var(--ink-mid);
   font-size: 0.75rem;
   letter-spacing: 0.02em;
   white-space: nowrap;
