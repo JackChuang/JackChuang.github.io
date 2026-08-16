@@ -350,12 +350,17 @@ hr.rule {
 /* Freshness stamp closing a section whose content goes stale — the open-source
    counts, which are only true as of the day they were collected. Set below
    .label size and left in sentence case: a reader who wants it will find it,
-   and nobody else has to read past it. */
+   and nobody else has to read past it.
+
+   ink-mid, not ink-soft. Measured on --paper: ink-soft is 2.94:1, which fails
+   WCAG AA for small text; ink-mid is 5.81:1 and passes. Quiet has to stop at
+   the point where it stops being readable, and this line states the one fact
+   on the page a reader might actually need to act on. */
 .stamp {
   font-family: var(--mono);
   font-size: 0.6875rem;
   letter-spacing: 0.04em;
-  color: var(--ink-soft);
+  color: var(--ink-mid);
   margin: 1.75rem 0 0;
 }
 
