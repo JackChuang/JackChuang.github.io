@@ -379,6 +379,21 @@ hr.rule {
    instead of leaving a 148px gutter with nothing in it. */
 .row--plain { grid-template-columns: minmax(0, 1fr); }
 
+/* ...and it drops the reading measure with it.
+
+   --measure is 68ch, sized for prose. On a railed row that cap sits inside a
+   column the rail has already pushed right, so the text ends near the right
+   margin. Without a rail the same cap starts 192px further left and therefore
+   ENDS 192px further left — the right boundary arrives early and every line
+   wraps sooner, on exactly the pages whose lines least want wrapping.
+
+   These rows hold scannable lists, not prose: pull request titles, author
+   lists, venue lines. A title broken across two lines is harder to scan than a
+   long one, and the 68ch argument does not apply to a line nobody reads
+   left-to-right for meaning. The wrap's own max-width still bounds it, so this
+   can never run wider than 1024px. */
+.row--plain .row__body { max-width: none; }
+
 /* A row that opens the page directly under its title, with no group label in
    between. Same reasoning as `.pagehead + .section`: the rule at the top of a
    first row separates it from what came before, and under an <h1> nothing did.
@@ -458,7 +473,12 @@ hr.rule {
    link's accessible name stays "ACM" and the punctuation is decoration. No
    underline and no uppercasing either: at three or four per entry, the
    treatment used elsewhere for standalone links would out-shout the titles. */
-.reflinks { margin-left: 0.55rem; }
+/* nowrap so the bracket set breaks as one unit. Without it a long venue or
+   summary line can leave [All] stranded at the end of one line and [Merged] on
+   the next, which reads as two separate things rather than one set of
+   references. The group is only two or three short links, so it can never
+   overflow a column. */
+.reflinks { margin-left: 0.55rem; white-space: nowrap; }
 .reflinks a {
   border-bottom: 0;
   color: var(--ink-mid);
