@@ -3,7 +3,7 @@ layout: default
 title: Projects
 permalink: /projects/
 description: Open-source work by Ho-Ren (Jack) Chuang on SGLang and vLLM — LLM inference kernels, KV-cache quantization, sparse attention, and CUDA-free inference with Triton.
-updated: 2026-08-15
+updated: 2026-11-14
 ---
 
 {%- comment -%}
@@ -17,7 +17,17 @@ updated: 2026-08-15
 
   No merged/open labels on individual lines. The count line at the top of each
   block states the split once, which keeps the page accurate without tagging
-  thirteen rows.
+  every row.
+
+  Closed-unmerged pull requests are left off the list: #44262, closed without
+  merging, and #47026, whose own title is "Created by mistake". #4792 is the exception — it is the SGLang half of
+  the CUDA-free article, which names it, so it stays as that work's record.
+  The [All] link still reaches every one of them.
+
+  The merged count uses the same definition as the [Merged] link, so the two
+  agree: authored, or co-authored where the pull request's own text says so —
+  15 authored + #32327 = 16. The limit of that definition is noted at the
+  search clause below.
 
   The CUDA-free Triton effort spans both repos, so the article that heads it is
   linked from both rather than given a block of its own — that keeps each
@@ -25,15 +35,24 @@ updated: 2026-08-15
 
   GROUPING EVIDENCE — established, not inferred from titles looking alike:
     #25751, #30514, #31888 each reference roadmap #25746 in their PR body, and
-      #25746 names #32327 as PR4. #20606 is grouped there by subject, being the
-      NSA sparse prefill path; it carries no reference.
+      #25746 names #32327 as PR4. #41790 references #25746 and the roadmap's
+      body lists it. #20606 is grouped there by subject, being the NSA sparse
+      prefill path; it carries no reference.
+    Tracking issue #45373's body lists #43363, #44612, #45274, #46426, #46784,
+      #47013 and #47047. It lists #41790 too, which stays under #25746, the
+      roadmap its own body names. #45376 references #43363, so it is grouped
+      with it.
     #10078 and #12612 reference roadmap #10083, whose body names #10078.
-      #13547 and #12596 continue that same FP4/FP8 KV-cache work; they carry no
-      cross-reference and are grouped by subject.
+      #13547 references #10078 and #12612; #12596 references #12612. They chain
+      into the same workstream.
     The article states its own scope: "We are currently working towards
       upstreaming this work to the SGLang repo #4792 and the vLLM repo #13319
       #13963."
-    MoE and speculative items are grouped by subject; no cross-references.
+    MoE and speculative items are grouped by subject, not under a roadmap.
+      #35413 cites the DSpark roadmap #30344 as background — that roadmap names
+      the same direction — and is grouped by subject rather than under it.
+      #46784 is speculative by subject but is listed in #45373, so it is
+      grouped there.
 
   Counts are collected from the GitHub API and reconciled against the API's own
   total_count, so a rate-limited run cannot quietly report a partial figure as
@@ -52,12 +71,17 @@ updated: 2026-08-15
 {%- assign article = "https://opensource.bytedance.com/blogDetail/103" -%}
 
 {%- comment -%}
-  "his work in this repo", authored or co-authored, as one search clause:
+  "his work in this repo" as one search clause:
   (author:JackChuang OR "Co-authored-by: JackChuang"), percent-encoded.
 
   author: alone under-reports, because it does not match a Co-authored-by
-  trailer. involves: over-reports, because it also returns pull requests he
-  only commented on. Only the union of the two exact conditions is his record.
+  line. involves: over-reports, because it also returns pull requests he only
+  commented on. The union of the two exact conditions is the closest a search
+  link can get, but not the whole record: issue search reads titles, bodies
+  and comments, never commit messages, so co-author credit that exists only in
+  a squash-commit trailer is invisible to it. #10356 and #14348 credit him that
+  way and are not counted (checked 2026-11-14). The error runs toward
+  understating, never overstating.
 
   ⚠️ THE PATH IS LOAD-BEARING: /issues?q=, not /pulls?q=. Parenthesised OR is
   only understood by the newer advanced search, which backs the /issues route.
@@ -73,6 +97,26 @@ updated: 2026-08-15
   path back; a link that silently returns 1 of 14 looks exactly like a link
   that works.
 {%- endcomment -%}
+{%- comment -%}
+  SGLang Summit 2026 talk. Each of talk_slides / talk_video renders its own
+  [Slides] / [Video] link only once it is set, and the title points at the best
+  one available. The venue name keeps the agenda link, which is the only page
+  that names the session, so it is not lost once the title moves.
+
+  The slides are the speaker's own Google Slides deck, shared by link. /preview
+  rather than /edit: it opens a clean read-only viewer for a logged-out visitor
+  instead of the editor with a sign-in prompt. A Drive link breaks silently if
+  its sharing changes or the file is moved or deleted, so before each publish,
+  fetch it with no cookies and check it returns the deck, not a sign-in page.
+
+  No recording yet; the organisers' FAQ: "Selected sessions will be recorded
+  and shared as edited clips after the event."
+{%- endcomment -%}
+{%- assign talk_agenda = "https://www.sglang.io/summit#agenda" -%}
+{%- assign talk_slides = "https://docs.google.com/presentation/d/1UoGH6lwK1JOQfYk7J1OYptY-Ts9sEvrQOFTZp3QEAZY/preview" -%}
+{%- assign talk_video = "" -%}
+{%- assign talk_href = talk_video | default: talk_slides | default: talk_agenda -%}
+
 {%- assign mine = "%28author%3AJackChuang+OR+%22Co-authored-by%3A+JackChuang%22%29" -%}
 
 <div class="pagehead">
@@ -99,11 +143,13 @@ updated: 2026-08-15
     <h2><a href="{{ sg }}" target="_blank" rel="noopener">SGLang</a></h2>
     <span class="cite">
       LLM inference kernels, KV-cache quantization, sparse attention &middot;
-      <strong>11 merged pull requests</strong> since November 2025, two more in review
+      <strong>16 merged pull requests</strong> since November 2025, eight more in review
       {%- comment -%}
-        Two links, not three. "All" now means all — co-authored pull requests
-        are inside it, so the separate [Co-authored] link that existed to
-        compensate for author: missing them has nothing left to reveal.
+        Two links, not three. "All" reaches every pull request he authored or
+        whose text carries a Co-authored-by line for him — #32327, which
+        author: alone misses, included — so the separate [Co-authored] link has
+        nothing left to reveal. The one kind of credit no search link can see is
+        noted at the search clause above.
 
         All first: it is the whole set, and Merged is a subset of it.
       {%- endcomment -%}
@@ -113,7 +159,43 @@ updated: 2026-08-15
       </span>
     </span>
 
+    <span class="cite" style="margin-top:0.85rem">
+      <span class="label">Talk</span>&nbsp;
+      <a href="{{ talk_href }}" target="_blank" rel="noopener">Making Frontier Open Models Fast on Hopper with SGLang</a>
+      &middot; <em><a href="{{ talk_agenda }}" target="_blank" rel="noopener">SGLang Summit 2026</a></em>, San Francisco, November 2026
+      {%- if talk_slides != "" or talk_video != "" %}
+      <span class="reflinks">
+        {%- if talk_slides != "" %}<a href="{{ talk_slides }}" target="_blank" rel="noopener">Slides</a>{% endif %}
+        {%- if talk_video != "" %}<a href="{{ talk_video }}" target="_blank" rel="noopener">Video</a>{% endif %}
+      </span>
+      {%- endif %}
+    </span>
+
     <ul class="detail" style="margin-top:1rem">
+      <li>
+        <strong>GLM-5.3-Flash on Hopper</strong> &mdash;
+        <a href="{{ sg }}/issues/45373" target="_blank" rel="noopener">[Tracking] GLM-5.3-Flash performance optimization on Hopper (SM90)</a>
+        &nbsp;<span class="label">tracking issue I opened</span>
+        <ul>
+          <li>[Perf] moe: Extend FlashInfer CUTLASS MoE autotune coverage to prefill chunks &middot;
+              <a href="{{ sg }}/pull/43363" target="_blank" rel="noopener">#43363</a></li>
+          <li>[Perf] [NVIDIA] KDA: Extend the CuTe DSL MTP verify kernel to SM90 &middot;
+              <a href="{{ sg }}/pull/44612" target="_blank" rel="noopener">#44612</a></li>
+          <li>[Perf] [NVIDIA] DSA: Pick any divisor of the tile count for the TileLang sparse decode split &middot;
+              <a href="{{ sg }}/pull/45274" target="_blank" rel="noopener">#45274</a></li>
+          <li>[Fix] moe: Publish a server config in the CUTLASS runner dispatch-format and placement tests &middot;
+              <a href="{{ sg }}/pull/45376" target="_blank" rel="noopener">#45376</a></li>
+          <li>[Perf] [NVIDIA] GLM-5.3-Flash: Add opt-in FP8 for the BF16 KDA projections &middot;
+              <a href="{{ sg }}/pull/46426" target="_blank" rel="noopener">#46426</a></li>
+          <li>[Perf] speculative: Fill the DSA MTP draft's prefill KV cache without attention for all but the last token &middot;
+              <a href="{{ sg }}/pull/46784" target="_blank" rel="noopener">#46784</a></li>
+          <li>[Fix] kvcache: Skip the reserved padding slot in the zero-RoPE MLA KV writer &middot;
+              <a href="{{ sg }}/pull/47013" target="_blank" rel="noopener">#47013</a></li>
+          <li>[Fix] glm5_next: Gather DFlash aux hidden states for every scattered MoE all-to-all backend &middot;
+              <a href="{{ sg }}/pull/47047" target="_blank" rel="noopener">#47047</a></li>
+        </ul>
+      </li>
+
       <li>
         <strong>Sparse MLA prefill</strong> &mdash;
         <a href="{{ sg }}/issues/25746" target="_blank" rel="noopener">[Feature] SM90 Q8KV8 FP8 Sparse MLA Prefill Kernel and SGLang NSA Runtime Integration</a>
@@ -128,6 +210,8 @@ updated: 2026-08-15
           <li>[DeepSeek-V4] Add Q8KV8 sparse MLA prefill runtime backend &middot;
               <a href="{{ sg }}/pull/32327" target="_blank" rel="noopener">#32327</a>
               &nbsp;<span class="label">co-author</span></li>
+          <li>[DSA] Q8KV8 FP8 Sparse Prefill on GLM-5.3-Flash with BF16 KV Cache &middot;
+              <a href="{{ sg }}/pull/41790" target="_blank" rel="noopener">#41790</a></li>
           <li>FIX: (NSA) Compute topk_indices_offset when NSA prefill flashmla_sparse is used with FP8 KV cache &middot;
               <a href="{{ sg }}/pull/20606" target="_blank" rel="noopener">#20606</a></li>
         </ul>
@@ -166,6 +250,10 @@ updated: 2026-08-15
         <ul>
           <li>[Speculative] Derive the speculative max_running_requests default from the decode CUDA-graph ladder &middot;
               <a href="{{ sg }}/pull/34290" target="_blank" rel="noopener">#34290</a></li>
+          <li>[Speculative] Derive the DSpark verify-budget cost table at CUDA graph capture &middot;
+              <a href="{{ sg }}/pull/35413" target="_blank" rel="noopener">#35413</a></li>
+          <li>[mem_cache][Spec] Size the MHA accepted-token KV move by chunk area, not tile width &middot;
+              <a href="{{ sg }}/pull/40734" target="_blank" rel="noopener">#40734</a></li>
         </ul>
       </li>
 
