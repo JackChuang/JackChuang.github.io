@@ -141,6 +141,26 @@ updated: 2026-11-14
 <div class="row row--plain{% unless grouped %} row--lead{% endunless %}">
   <div class="row__body">
     <h2><a href="{{ sg }}" target="_blank" rel="noopener">SGLang</a></h2>
+    {%- comment -%}
+      The talk leads the block: it outranks any single pull request. So it
+      comes before the pull-request summary, and it is set the way a paper is
+      on the Publications page — the title is the link, the venue line sits
+      beneath — with the accent rule the site keeps for what matters most.
+    {%- endcomment -%}
+    <div class="talk">
+      <span class="label">Talk</span>
+      <h3><a href="{{ talk_href }}" target="_blank" rel="noopener">Making Frontier Open Models Fast on Hopper with SGLang</a></h3>
+      <span class="cite">
+        <em><a href="{{ talk_agenda }}" target="_blank" rel="noopener">SGLang Summit 2026</a></em>, San Francisco, November 2026
+        {%- if talk_slides != "" or talk_video != "" %}
+        <span class="reflinks">
+          {%- if talk_slides != "" %}<a href="{{ talk_slides }}" target="_blank" rel="noopener">Slides</a>{% endif %}
+          {%- if talk_video != "" %}<a href="{{ talk_video }}" target="_blank" rel="noopener">Video</a>{% endif %}
+        </span>
+        {%- endif %}
+      </span>
+    </div>
+
     <span class="cite">
       LLM inference kernels, KV-cache quantization, sparse attention &middot;
       <strong>16 merged pull requests</strong> since November 2025, eight more in review
@@ -157,18 +177,6 @@ updated: 2026-11-14
         <a href="{{ sg }}/issues?q=is%3Apr+{{ mine }}" target="_blank" rel="noopener">All</a>
         <a href="{{ sg }}/issues?q=is%3Apr+is%3Amerged+{{ mine }}" target="_blank" rel="noopener">Merged</a>
       </span>
-    </span>
-
-    <span class="cite" style="margin-top:0.85rem">
-      <span class="label">Talk</span>&nbsp;
-      <a href="{{ talk_href }}" target="_blank" rel="noopener">Making Frontier Open Models Fast on Hopper with SGLang</a>
-      &middot; <em><a href="{{ talk_agenda }}" target="_blank" rel="noopener">SGLang Summit 2026</a></em>, San Francisco, November 2026
-      {%- if talk_slides != "" or talk_video != "" %}
-      <span class="reflinks">
-        {%- if talk_slides != "" %}<a href="{{ talk_slides }}" target="_blank" rel="noopener">Slides</a>{% endif %}
-        {%- if talk_video != "" %}<a href="{{ talk_video }}" target="_blank" rel="noopener">Video</a>{% endif %}
-      </span>
-      {%- endif %}
     </span>
 
     <ul class="detail" style="margin-top:1rem">

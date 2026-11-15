@@ -445,6 +445,20 @@ hr.rule {
 .row__body ul { margin: 0 0 0.9rem; padding-left: 1.15rem; }
 .row__body li { margin-bottom: 0.3rem; }
 
+/* A highlighted entry at the head of a block — the SGLang Summit talk. Set
+   like a paper on Publications (sans title as the link, mono venue line), and
+   marked with the accent: the site spends that colour only on what is current
+   or matters most, and this outranks every row beneath it. Accent on paper
+   measures well above AA, so the label is legible where the grey .label is not. */
+.talk {
+  margin: 0.9rem 0 1.2rem;
+  padding: 0.1rem 0 0.15rem 0.95rem;
+  border-left: 2px solid var(--accent);
+}
+.talk .label { display: block; color: var(--accent); }
+.talk h3 { margin: 0.25rem 0 0; }
+.talk .cite { margin-top: 0.3rem; }
+
 /* citation line for publications */
 .cite {
   display: block;
